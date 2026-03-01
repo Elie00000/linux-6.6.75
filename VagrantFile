@@ -1,0 +1,17 @@
+Vagrant.configure("2") do |config|
+  config.vm.provider :libvirt do |lv|
+    # On récupère le chemin où la box est installée sur la machine de l'utilisateur
+    box_path = File.expand_path(".", __dir__)
+
+    lv.memory = 3584
+    lv.cpus = 2
+    lv.cpu_mode = "host-passthrough"
+    lv.graphics_type = "none"
+
+    # Direct Kernel Boot depuis l'intérieur de la box
+    lv.kernel = "#{box_path}/bzImage"
+    lv.initrd = "#{box_path}/ramdisk_v1.img"
+    lv.cmd_line = "console=ttyS0 root=/dev/vda1 rootfstype=ext4 rootflags=discard rw sysctl.kernel.dmesg_restrict=1 sysctl.kernel.kptr_restrict=2"
+
+     end
+end
