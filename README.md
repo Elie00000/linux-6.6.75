@@ -30,7 +30,3 @@ tar cvzf mitigation-v3-full.box \
   bzImage \
   ramdisk_v1.img \
   Vagrantfile
-``
-
-```bash
-rm mitigation-v3-full.box
